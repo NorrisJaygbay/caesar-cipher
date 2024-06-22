@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caesar-Cipher Project</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Caesar Cipher</h1>
+    <section class="encryptionControl">
+        <div>
+            <label for="">Enter Key</label><br>
+            <input type="text" id="encryptkey" placeholder="Enter Key">
+        </div>
+        
+        <div class="encryptionControl2">
+            <div>
+                <label for="">Enter Text</label><br>
+                <input type="text" id="enterText" placeholder="Enter text">
+            </div>
+
+            <div>
+                <label for="">Encrypted text</label><br>
+                <input type="text" id="encryptedText" readonly placeholder="Encrypted text">
+            </div>
+        </div>
+        <button onclick="encrypt()">Encrypt</button>
+    </section>
+    
+    <section class="decryptionControl">
+        <div>
+            <label for="">Enter Key</label><br>
+            <input type="text" id="decryptKey" placeholder="Enter Key">
+        </div>
+        <div class="encryptionControl2">
+            <div>
+                <label for="">Encrypted text:</label><br>
+                <input type="text" id="decryptCiphertext" placeholder="Enter encrypted text">
+            </div>
+            <div>
+                <label for="">Decrypted Text:</label><br>
+                <input type="text" id="decryptedtext" readonly placeholder="Decrypted text">        
+            </div>
+        </div>
+        <button onclick="decrypt()">Decrypt</button>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
