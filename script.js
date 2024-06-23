@@ -1,42 +1,38 @@
-function generateBlocks() {
-    const container_for_Block = document.getElementById('container-for-Block');
-    const block_Number = parseInt(document.getElementById('blockNumber').value);
-    container_for_Block.innerHTML = '';
+function encrypt() {
+    let encryptKey = parseInt(document.getElementById("encryptkey").value);
 
-    if (isNaN(block_Number) || block_Number < 1 || block_Number > 8) {
-        alert('Please enter a number between 1 and 8.');
-        return;
+    if (isValidShift(encryptKey)) {
+        let plaintext = document.getElementById("enterText").value;
+        let encryptedText = caesarCipher(plaintext, encryptKey);
+        document.getElementById("encryptedText").value = encryptedText;
+    } else {
+        alert("Key value must be between 1 and 25.");
     }
+}
 
-    let delay = 0;
-    const delayIncrement = 0.1;  // Delay increment for each block
-
-    for (let i = 1; i <= block_Number; i++) {
-        const line = document.createElement('div');
-        line.className = 'line';
-
-        const leftBlocks = document.createElement('div');
-        leftBlocks.className = 'blocks';
-        for (let j = 0; j < i; j++) {
-            const block = document.createElement('div');
-            block.className = 'block';
-            block.style.animationDelay = `${delay}s`;
-            delay += delayIncrement;
-            leftBlocks.appendChild(block);
-        }
-
-        const rightBlocks = document.createElement('div');
-        rightBlocks.className = 'blocks';
-        for (let j = 0; j < i; j++) {
-            const block = document.createElement('div');
-            block.className = 'block';
-            block.style.animationDelay = `${delay}s`;
-            delay += delayIncrement;
-            rightBlocks.appendChild(block);
-        }
-
-        line.appendChild(leftBlocks);
-        line.appendChild(rightBlocks);
-        container_for_Block.appendChild(line);
+function decrypt() {
+    let decryptKey = parseInt(document.getElementById("decryptKey").value);
+    if (isValidShift(decryptKey)) {
+        let plaintext = document.getElementById("enterText").value;
+        let encryptedText = document.getElementById("decryptCiphertext").value;
+        let decryptedtext = caesarCipher(encryptedText, -decryptKey);
+        document.getElementById("decryptedtext").value = decryptedtext;
+    } else {
+        alert("Key value must be between 1 and 25.");
     }
+}
+
+function caesarCipher(str, decryptKey) {
+    return str.split('').map(char => {
+        if (char.match(/[a-z]/i)) {
+            let code = char.charCodeAt(0);
+            let base = (code >= 65 && code <= 90) ? 65 : 97;
+            return String.fromCharCode(((code - base + decryptKey + 26) % 26) + base);
+        }
+        return char;
+    }).join('');
+}
+
+function isValidShift(decryptKey) {
+    return decryptKey >= 1 && decryptKey <= 25;
 }
